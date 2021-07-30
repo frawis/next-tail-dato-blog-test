@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { request } from '@/lib/datocms'
-import { Image, StructuredText, renderMetaTags } from 'react-datocms'
+import { renderMetaTags } from 'react-datocms'
+import Container from '@/components/container'
+import Date from '@/components/date'
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
     site: _site {
@@ -21,31 +24,30 @@ const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
     id
     title
     excerpt
-    content {
-        value
+    slug
+    category {
+      name
+      slug
+      color
     }
-    coverImage {
-        responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
-          srcSet
-          webpSrcSet
-          sizes
-          src
-          width
-          height
-          aspectRatio
-          alt
-          title
-          base64
-        }
+    author {
+      name
+      slug
+      picture {
+        url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
       }
     }
+    _publishedAt
+    _createdAt
+    date
+  }
 }`
 
 export async function getStaticProps(context) {
   const data = await request({
     query: HOMEPAGE_QUERY,
     variables: { limit: 3 },
-    preview: context.preview
+    preview: context.preview,
   })
 
   return {
@@ -56,26 +58,61 @@ export async function getStaticProps(context) {
 const BlogIndex = ({ data }) => {
   return (
     <>
-      <Head>
-        {renderMetaTags(data.blog.seo.concat(data.site.favicon))}
-        
-      </Head>
+      <Head>{renderMetaTags(data.blog.seo.concat(data.site.favicon))}</Head>
       <div>
-        <div>
-          {data.allPosts.map((blogPost) => (
-            <article key={blogPost.id}>
-              <div className="h-32 w-32">
-                <Image data={blogPost.coverImage.responsiveImage} />
-              </div>
-              <div>{blogPost.title}</div>
-              <div>{blogPost.excerpt}</div>
-              <div className="prose prose-green">
-                <StructuredText data={blogPost.content} />
-              </div>
-            </article>
-          ))}{' '}
-        </div>
-        <div>{JSON.stringify(data, null, 2)}</div>
+        <Container>
+          <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+            {data.allPosts.map((blogPost) => (
+              <article key={blogPost.id}>
+                <div>
+                  <Link
+                    as={`/blog/category/${blogPost.category.slug}`}
+                    href="/blog/category/[slug]"
+                  >
+                    <a className="inline-block">
+                      <span
+                        className={`${blogPost.category.color} font-display inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium`}
+                      >
+                        {blogPost.category.name}
+                      </span>
+                    </a>
+                  </Link>
+                </div>
+                <Link as={`/blog/${blogPost.slug}`} href="/blog/[slug]">
+                  <a className="block mt-4">
+                    <p className="text-xl font-display font-extrabold text-gray-900">
+                      {blogPost.title}
+                    </p>
+                    <p className="mt-3 text-base text-gray-600">
+                      {blogPost.excerpt}
+                    </p>
+                  </a>
+                  </Link>
+                  <div className="mt-6 flex items-center">
+                    <div className="flex-shrink-0">
+                      <a href={blogPost.author.slug}>
+                        <span className="sr-only">{blogPost.author.name}</span>
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={blogPost.author.picture.url}
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-display font-medium text-gray-900 hover:text-green-600">
+                        <a href={blogPost.author.slug}>{blogPost.author.name}</a>
+                      </p>
+                      <div className="flex space-x-1 font-display text-sm text-gray-500">
+                        <Date dateString={blogPost.date} />
+                      </div>
+                    </div>
+                  </div>
+                
+              </article>
+            ))}
+          </div>
+        </Container>
       </div>
     </>
   )
