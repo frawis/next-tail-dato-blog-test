@@ -12,9 +12,11 @@ export default function Home() {
         <h1 className="text-6xl font-bold">
           Welcome to{' '}
           <a className="text-blue-600" href="https://nextjs.org">
-            <span className="font-bold text-green-700">Black</span><span className="text-green-500 font-light">Nickr</span>
+            <span className="font-bold text-green-700">Black</span>
+            <span className="text-green-500 font-light">Nickr</span>
           </a>
         </h1>
+        
       </main>
 
       <footer className="flex items-center justify-center w-full h-24 border-t">
