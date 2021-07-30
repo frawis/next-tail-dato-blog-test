@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { request } from '@/lib/datocms'
+import { Image } from 'react-datocms'
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
   allPosts(first: $limit) {
@@ -35,9 +36,24 @@ export async function getStaticProps() {
 
 const BlogIndex = ({ data }) => {
   return (
-    <div>
-      <div>{JSON.stringify(data, null, 2)}</div>
-    </div>
+    <>
+      <Head>
+        <title>Latest News | BlackNickr</title>
+      </Head>
+      <div>
+        <div>
+          {data.allPosts.map((blogPost) => (
+            <article key={blogPost.id}>
+              <div className="h-32 w-32">
+                <Image data={blogPost.coverImage.responsiveImage} />
+              </div>
+              <div>{blogPost.title}</div>
+            </article>
+          ))}{' '}
+        </div>
+        <div>{JSON.stringify(data, null, 2)}</div>
+      </div>
+    </>
   )
 }
 
