@@ -1,11 +1,29 @@
 import Head from 'next/head'
 import { request } from '@/lib/datocms'
-import { Image } from 'react-datocms'
+import { Image, StructuredText, renderMetaTags } from 'react-datocms'
 
 const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
+    site: _site {
+        favicon: faviconMetaTags {
+          attributes
+          content
+          tag
+        }
+      }
+      blog {
+        seo: _seoMetaTags {
+          attributes
+          content
+          tag
+        }
+      }
   allPosts(first: $limit) {
     id
     title
+    excerpt
+    content {
+        value
+    }
     coverImage {
         responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
           srcSet
@@ -20,7 +38,7 @@ const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
           base64
         }
       }
-  }
+    }
 }`
 
 export async function getStaticProps() {
@@ -38,7 +56,8 @@ const BlogIndex = ({ data }) => {
   return (
     <>
       <Head>
-        <title>Latest News | BlackNickr</title>
+        {renderMetaTags(data.blog.seo.concat(data.site.favicon))}
+        
       </Head>
       <div>
         <div>
@@ -48,6 +67,10 @@ const BlogIndex = ({ data }) => {
                 <Image data={blogPost.coverImage.responsiveImage} />
               </div>
               <div>{blogPost.title}</div>
+              <div>{blogPost.excerpt}</div>
+              <div className="prose prose-green">
+                <StructuredText data={blogPost.content} />
+              </div>
             </article>
           ))}{' '}
         </div>
