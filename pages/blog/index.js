@@ -41,10 +41,11 @@ const HOMEPAGE_QUERY = `query HomePage($limit: IntType) {
     }
 }`
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const data = await request({
     query: HOMEPAGE_QUERY,
     variables: { limit: 3 },
+    preview: context.preview
   })
 
   return {
