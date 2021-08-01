@@ -44,6 +44,9 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.300', defaultTheme.colors.gray[300]),
+            h1: {
+              color: theme('colors.gray.200', defaultTheme.colors.gray[200]),
+            },
             h2: {
               color: theme('colors.gray.200', defaultTheme.colors.gray[200]),
             },
@@ -53,6 +56,24 @@ module.exports = {
             h4: {
               color: theme('colors.gray.300', defaultTheme.colors.gray[300]),
             },
+            a: { color: theme('colors.gray.100') },
+            strong: { color: theme('colors.gray.100') },
+            'ul > li::before': { backgroundColor: theme('colors.gray.700') },
+            hr: { borderColor: theme('colors.gray.800') },
+            blockquote: {
+              color: theme('colors.gray.300'),
+              borderLeftColor: theme('colors.green.800'),
+            },
+            'a code': { color: theme('colors.gray.100') },
+            pre: {
+              color: theme('colors.gray.200'),
+              backgroundColor: theme('colors.gray.800'),
+            },
+            thead: {
+              color: theme('colors.gray.100'),
+              borderBottomColor: theme('colors.gray.700'),
+            },
+            'tbody tr': { borderBottomColor: theme('colors.gray.800') },
           },
         },
       }),

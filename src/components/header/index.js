@@ -11,8 +11,8 @@ const Header = () => {
   return (
     <header className="bg-green-600">
       <Container>
-        <div className="w-full py-6 flex items-center justify-between border-b border-green-500 lg:border-none">
-          <div className="flex items-center w-full">
+        <div className="w-full py-6 flex items-center border-b border-green-500 lg:border-none">
+          <div className="flex items-center justify-between w-full">
             <Link href="/">
               <a>
                 <span className="sr-only">BlackNickr</span>
@@ -24,7 +24,7 @@ const Header = () => {
                 </span>
               </a>
             </Link>
-            <div className="hidden lg:w-full lg:flex lg:justify-between">
+            <div className="flex items-center w-full justify-end lg:justify-between">
               <div className="hidden ml-10 space-x-8 lg:block">
                 {navigation.map((link) => (
                   <Link key={link.name} href={link.href}>
@@ -39,15 +39,6 @@ const Header = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          {navigation.map((link) => (
-            <Link key={link.name} href={link.href}>
-              <a className="font-display text-base font-medium text-white hover:text-green-50">
-                {link.name}
-              </a>
-            </Link>
-          ))}
         </div>
       </Container>
     </header>

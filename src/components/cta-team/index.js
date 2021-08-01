@@ -1,7 +1,6 @@
 const { StructuredText, Image } = require('react-datocms')
 
 const CtaTeam = ({ data }) => {
-  console.log(data)
   return (
     <div className="relative py-16 bg-white dark:bg-gray-700">
       <div
@@ -12,7 +11,7 @@ const CtaTeam = ({ data }) => {
         <div className="lg:grid lg:grid-cols-12">
           <div className="relative z-10 lg:col-start-1 lg:row-start-1 lg:col-span-4 lg:py-16 lg:bg-transparent">
             <div
-              className="absolute inset-x-0 h-1/2 bg-gray-50 lg:hidden"
+              className="absolute inset-x-0 h-1/2 bg-gray-50 dark:bg-gray-700 lg:hidden"
               aria-hidden="true"
             />
             <div className="max-w-md mx-auto px-4 sm:max-w-3xl sm:px-6 lg:max-w-none lg:p-0">
