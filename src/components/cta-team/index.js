@@ -3,9 +3,9 @@ const { StructuredText, Image } = require('react-datocms')
 const CtaTeam = ({ data }) => {
   console.log(data)
   return (
-    <div className="relative py-16 bg-white">
+    <div className="relative py-16 bg-white dark:bg-gray-700">
       <div
-        className="hidden absolute top-0 inset-x-0 h-1/2 bg-gray-50 lg:block"
+        className="hidden absolute top-0 inset-x-0 h-1/2 bg-gray-50 lg:block dark:bg-gray-800"
         aria-hidden="true"
       />
       <div className="max-w-7xl mx-auto bg-green-600 lg:bg-transparent lg:px-8">

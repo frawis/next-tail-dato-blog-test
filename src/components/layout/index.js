@@ -1,5 +1,5 @@
 import Header from "@/components/header"
-import Footer from "@/components/Footer"
+import Footer from "@/components/footer"
 
 const Layout = ({ preview, children }) => {
   return (
