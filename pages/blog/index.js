@@ -63,7 +63,7 @@ const BlogIndex = ({ data }) => {
         <Container>
           <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
             {data.allPosts.map((blogPost) => (
-              <article key={blogPost.id}>
+              <article key={blogPost.id} className="flex flex-col">
                 <div>
                   <Link
                     as={`/blog/category/${blogPost.category.slug}`}
@@ -79,11 +79,11 @@ const BlogIndex = ({ data }) => {
                   </Link>
                 </div>
                 <Link as={`/blog/${blogPost.slug}`} href="/blog/[slug]">
-                  <a className="block mt-4">
-                    <p className="text-xl font-display font-extrabold text-gray-900">
+                  <a className="block mt-4 flex-1 group">
+                    <p className="text-xl font-display font-extrabold text-gray-900 group-hover:text-green-600">
                       {blogPost.title}
                     </p>
-                    <p className="mt-3 text-base text-gray-600">
+                    <p className="mt-3 text-base text-gray-600 group-hover:text-gray-800">
                       {blogPost.excerpt}
                     </p>
                   </a>
@@ -103,7 +103,7 @@ const BlogIndex = ({ data }) => {
                       <p className="text-sm font-display font-medium text-gray-900 hover:text-green-600">
                         <a href={blogPost.author.slug}>{blogPost.author.name}</a>
                       </p>
-                      <div className="flex space-x-1 font-display text-sm text-gray-500">
+                      <div className="flex space-x-1 font-display text-xs text-gray-500">
                         <Date dateString={blogPost.date} />
                       </div>
                     </div>

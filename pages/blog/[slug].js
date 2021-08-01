@@ -9,7 +9,8 @@ import { CameraIcon } from '@heroicons/react/solid'
 import { request } from '@/lib/datocms'
 import { metaTagsFragment, responsiveImageFragment } from '@/lib/fragments'
 
-import Container from '@/components/container'
+import DividerWithTitle from '@/components/dividers/withtitle'
+import CtaTeam from '@/components/cta-team'
 
 export async function getStaticPaths() {
   const data = await request({ query: `{ allPosts {slug} }` })
@@ -35,6 +36,8 @@ export async function getStaticProps({ params, preview = false }) {
               }
               title
               slug
+              excerpt
+              layout
               content {
                 value
                 
@@ -57,6 +60,32 @@ export async function getStaticProps({ params, preview = false }) {
               }
               category {
                 name
+              }
+              tags {
+                slug
+                name
+              }
+              ctaEnd {
+                blocks {
+                  targetSite
+                  buttonLabel
+                  description {
+                    value
+                  }
+                  title
+                  coverImage {
+                    responsiveImage(imgixParams: {auto: format, fit: crop, h: "500", w: "500"}) {
+                      base64
+                      src
+                      srcSet
+                      title
+                      webpSrcSet
+                      width
+                      height
+                      alt
+                    }
+                  }
+                }
               }
             }
             morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
@@ -187,6 +216,27 @@ const BlogPost = ({ subscription, preview }) => {
               </div>
             </div>
           </div>
+          {post.tags &&
+            post.tags.map((tag) => (
+              <span
+                key={tag.name}
+                className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800"
+              >
+                {tag.name}
+              </span>
+            ))}
+        </div>
+        {post.ctaEnd && post.ctaEnd.blocks.length > 0 ? (
+          <CtaTeam data={post.ctaEnd.blocks[0]} />
+        ) : null}
+        <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+          {/* <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" /> */}
+          <DividerWithTitle text="More Posts" />
+          {morePosts.length > 0 &&
+            morePosts &&
+            morePosts.map((blogPost) => (
+              <div key={blogPost.slug}>{blogPost.title}</div>
+            ))}
         </div>
       </div>
     </>
