@@ -12,7 +12,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="antialiased font-body">
+        <body className="antialiased font-body relative mb-[72px] sm:mb-0 dark:bg-gray-800">
           <Main />
           <NextScript />
         </body>
