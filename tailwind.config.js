@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     colors: {
       transparent: 'transparent',
@@ -27,17 +27,31 @@ module.exports = {
             h2: {
               fontFamily: ['Nunito'],
               fontWeight: 700,
-              color: theme("colors.gray.800", defaultTheme.colors.gray[800]),
+              color: theme('colors.gray.800', defaultTheme.colors.gray[800]),
             },
             h3: {
               fontFamily: ['Nunito'],
               fontWeight: 700,
-              color: theme("colors.gray.700", defaultTheme.colors.gray[700]),
+              color: theme('colors.gray.700', defaultTheme.colors.gray[700]),
             },
             h4: {
               fontFamily: ['Nunito'],
               fontWeight: 700,
-              color: theme("colors.gray.700", defaultTheme.colors.gray[700]),
+              color: theme('colors.gray.700', defaultTheme.colors.gray[700]),
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.gray.300', defaultTheme.colors.gray[300]),
+            h2: {
+              color: theme('colors.gray.200', defaultTheme.colors.gray[200]),
+            },
+            h3: {
+              color: theme('colors.gray.300', defaultTheme.colors.gray[300]),
+            },
+            h4: {
+              color: theme('colors.gray.300', defaultTheme.colors.gray[300]),
             },
           },
         },
@@ -45,9 +59,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {
-      
-    },
+    extend: {},
   },
   plugins: [
     require('@tailwindcss/typography'),

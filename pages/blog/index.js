@@ -80,10 +80,10 @@ const BlogIndex = ({ data }) => {
                 </div>
                 <Link as={`/blog/${blogPost.slug}`} href="/blog/[slug]">
                   <a className="block mt-4 flex-1 group">
-                    <p className="text-xl font-display font-extrabold text-gray-900 group-hover:text-green-600">
+                    <p className="text-xl font-display font-extrabold text-gray-900 group-hover:text-green-600 dark:text-gray-100 dark:group-hover:text-green-500">
                       {blogPost.title}
                     </p>
-                    <p className="mt-3 text-base text-gray-600 group-hover:text-gray-800">
+                    <p className="mt-3 text-base text-gray-600 group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-gray-100">
                       {blogPost.excerpt}
                     </p>
                   </a>
@@ -100,10 +100,10 @@ const BlogIndex = ({ data }) => {
                       </a>
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-display font-medium text-gray-900 hover:text-green-600">
+                      <p className="text-sm font-display font-medium text-gray-900 hover:text-green-600 dark:text-gray-100 dark:hover:text-green-500">
                         <a href={blogPost.author.slug}>{blogPost.author.name}</a>
                       </p>
-                      <div className="flex space-x-1 font-display text-xs text-gray-500">
+                      <div className="flex space-x-1 font-display text-xs text-gray-500 dark:text-gray-300">
                         <Date dateString={blogPost.date} />
                       </div>
                     </div>

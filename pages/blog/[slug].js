@@ -141,15 +141,15 @@ const BlogPost = ({ subscription, preview }) => {
   return (
     <>
       <Head>{renderMetaTags(metaTags)}</Head>
-      <div className="bg-white overflow-hidden">
+      <div className="bg-white overflow-hidden dark:bg-gray-700">
         <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
+          <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen dark:bg-gray-800" />
           <div className="mx-auto text-base max-w-prose lg:grid lg:grid-cols-2 lg:gap-8 lg:max-w-none">
             <div>
-              <h2 className="font-display text-base text-green-600 font-bold tracking-wide uppercase">
+              <h2 className="font-display text-base text-green-600 font-bold tracking-wide uppercase dark:text-green-400">
                 {post.category.name}
               </h2>
-              <h1 className="mt-2 text-3xl leading-8 font-display font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              <h1 className="mt-2 text-3xl leading-8 font-display font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
                 {post.title}
               </h1>
             </div>
@@ -178,7 +178,7 @@ const BlogPost = ({ subscription, preview }) => {
                       y={0}
                       width={4}
                       height={4}
-                      className="text-gray-200"
+                      className="text-gray-200 dark:text-gray-600"
                       fill="currentColor"
                     />
                   </pattern>
@@ -197,7 +197,7 @@ const BlogPost = ({ subscription, preview }) => {
                       data={post.coverImage.responsiveImage}
                     />
                   </div>
-                  <figcaption className="mt-3 flex text-sm text-gray-500">
+                  <figcaption className="mt-3 flex text-sm text-gray-500 dark:text-gray-300">
                     <CameraIcon
                       className="flex-none w-5 h-5 text-gray-400"
                       aria-hidden="true"
@@ -209,9 +209,9 @@ const BlogPost = ({ subscription, preview }) => {
             </div>
             <div className="mt-8 lg:mt-0">
               <div className="text-base max-w-prose mx-auto lg:max-w-none">
-                <p className="text-lg text-gray-500">{post.excerpt}</p>
+                <p className="text-lg text-gray-500 dark:text-gray-100">{post.excerpt}</p>
               </div>
-              <div className="mt-5 prose prose-green text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
+              <div className="mt-5 prose prose-green dark:prose-dark dark:prose-green text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
                 <StructuredText data={post.content} />
               </div>
             </div>
