@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import { MoonIcon, LightBulbIcon } from '@heroicons/react/outline'
+import { cx } from '@/utils/cx'
 
 const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false)
@@ -15,10 +16,6 @@ const ThemeSwitcher = () => {
     } else {
       setTheme('dark')
     }
-  }
-
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
   }
 
   useEffect(() => {
@@ -37,20 +34,20 @@ const ThemeSwitcher = () => {
       <Switch
         checked={enabled}
         onChange={toogleTheme}
-        className={classNames(
+        className={cx(
           enabled ? 'bg-green-500' : 'bg-green-200',
           'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400'
         )}
       >
         <span className="sr-only">Use setting</span>
         <span
-          className={classNames(
+          className={cx(
             enabled ? 'translate-x-5' : 'translate-x-0',
             'pointer-events-none relative inline-block h-5 w-5 rounded-full bg-green-100 shadow transform ring-0 transition ease-in-out duration-200'
           )}
         >
           <span
-            className={classNames(
+            className={cx(
               enabled
                 ? 'opacity-0 ease-out duration-100'
                 : 'opacity-100 ease-in duration-200',
@@ -61,7 +58,7 @@ const ThemeSwitcher = () => {
             <LightBulbIcon className="h-3 w-3 text-green-400" />
           </span>
           <span
-            className={classNames(
+            className={cx(
               enabled
                 ? 'opacity-100 ease-in duration-200'
                 : 'opacity-0 ease-out duration-100',
